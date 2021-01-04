@@ -38,5 +38,13 @@
             </form>
         </div>
     </nav>
+    <% results.forEach(function(result){ %>
+        <span class="container1">
+            <img id="image" src="<%= result.ref %>.jpg" width="193" height="300">
+            <a href= <%= result.ref %> ><strong><%= result.name%></strong></a> 
+        </span>
+        
+        <% }) %>
+
 </body>
 </html>
