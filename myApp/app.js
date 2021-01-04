@@ -88,7 +88,7 @@ app.post('/register',function(req,res){
   for(var i=0;i<data.length;i++){
       if(data[i].user == x.user){
         flag=true;
-        res.render(alertRegistration);
+        res.render('alertRegistration');
         break;
     }
   } 
@@ -113,15 +113,66 @@ app.post('/',function(req,res){
         break;
       }
       else {
-        res.render(alertPassword);
+        res.render('alertPassword');
       }
     }
   }
   if(userexists==false){
-    res.render(alertLoginUsername);
+    res.render('alertLoginUsername');
   }
 });
 
+
+app.post('/sun',function(req,res){
+  var x='The Sun and Her Flowers';
+  if(!fs.existsSync("wantToRead.json"))
+  {
+  var wantToRead =new Array();
+  var y= JSON.stringify(wantToRead);
+  fs.writeFileSync("wantToRead.json",y);
+  }
+  var i= fs.readFileSync("wantToRead.json");
+  var data = JSON.parse(i);
+  var flag= false;
+  for(var i=0;i<data.length;i++){
+      if(data[i] == x){
+        flag=true;
+        //res.render('alertRegistration');
+        break;
+    }
+  } 
+  if(flag==false){
+    data.push(x);
+    var y=JSON.stringify(data);
+    fs.writeFileSync("wantToRead.json",y);``
+}});
+
+var books= [{name: 'The Sun and Her Flowers', ref:'/sun'},
+{name: 'To Kill a Mockingbird', ref:'/mockingbird'},
+{name: 'Dune', ref:'/dune'},
+{name: 'Lord of the Flies', ref:'/flies'},
+{name: 'The Grapes of Wrath', ref:'/grapes'},
+{name: 'Leaves of Grass', ref:'/leaves'}];
+
+
+app.post('/search',function(req,res){
+var keyword = req.body.Search;
+var results=[];
+var flag=false;
+for(var i=0;i<books.length;i++){
+  if(books[i].name.toLowerCase().includes(keyword.toLowerCase())){
+    results.push(books[i]);
+    flag=true;
+    
+  }
+}
+if(flag == false){
+  res.render('booknotfound');
+}
+else{
+res.render('searchresults',{results: results});
+}
+});
 
 if(process.env.PORT){
   app.listen(process.env.PORT,function(){console.log("Server started")});

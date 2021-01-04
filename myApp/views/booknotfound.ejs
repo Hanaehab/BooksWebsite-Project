@@ -22,6 +22,9 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+    <script>
+        alert("Book not found");  
+    </script>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
         <a class="navbar-brand" style="color: rgb(191, 255, 161)">Search Results</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -38,10 +41,5 @@
             </form>
         </div>
     </nav>
-    <% results.forEach(function(result){ %>
-        
-        <a href= <%= result.ref %> ><strong><%= result.name%></strong></a> </br>
-        <% }) %>
-        
 </body>
 </html>
