@@ -336,7 +336,6 @@ res.render('searchresults',{results: results});
 
 app.post('/readlist',function(req,res){
   var x=req.session.name;
-  console.log(x);
   var i= fs.readFileSync("wantToRead.json");
   var data = JSON.parse(i);
   var bookNames=[]
